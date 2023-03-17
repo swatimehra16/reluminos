@@ -1,17 +1,9 @@
 <template>
   <v-container>
     <v-row>
-      <v-spacer></v-spacer>
-      <v-col cols="auto">
-        <v-btn color="primary" @click="$router.push('/')">Logout</v-btn>
-      </v-col>
-    </v-row>
-    <v-row>
       <v-col cols="6">
-        <v-card-title>
-          <v-text-field v-model="inputVal" label="Add task!">
-          </v-text-field> </v-card-title
-      ></v-col>
+        <v-text-field v-model="inputVal" label="Add task!"> </v-text-field>
+      </v-col>
       <v-col cols="auto">
         <v-card-title
           ><v-btn color="primary" @click.prevent="addTask"

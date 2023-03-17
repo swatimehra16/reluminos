@@ -6,4 +6,8 @@ export default {
   loggedInUser(state) {
     return state.loggedInUser
   },
+
+  users(state) {
+    return state.users
+  },
 }
