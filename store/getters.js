@@ -10,4 +10,7 @@ export default {
   users(state) {
     return state.users
   },
+  role(state) {
+    return state.role
+  },
 }

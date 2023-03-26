@@ -1,7 +1,7 @@
 export default () => ({
   users: [
-    { email: 'test1@test.com', pwd: 'test1' },
-    { email: 'test2@test.com', pwd: 'test2' },
+    { name: 'user1', email: 'test1@test.com', pwd: 'test1', role: 'user' },
+    { name: 'user2', email: 'test2@test.com', pwd: 'test2', role: 'admin' },
   ],
   todos: [
     // { task: 'Test Task 1', status: 'done', user: 'test1@test.com', id: 1 },
@@ -11,4 +11,5 @@ export default () => ({
     // { task: 'New Task 2', status: 'undone', user: 'test1@test.com', id: 5 },
   ],
   loggedInUser: '',
+  role: '',
 })

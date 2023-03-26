@@ -37,14 +37,29 @@
         </v-btn>
       </template>
       <template #[`item.actions`]="{ item }">
+        <v-icon small class="mr-2" @click="editTask(item)"> mdi-pencil </v-icon>
         <v-icon small @click="removeTodo(item)"> mdi-delete </v-icon>
       </template>
     </v-data-table>
+
+    <v-dialog v-model="dialogEdit" max-width="500px">
+      <v-card>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-text-field v-model="editedItem.task"></v-text-field>
+          <v-spacer></v-spacer>
+          <v-btn @click="saveEditedTask()">Save</v-btn>
+          <v-btn @click="dialogEdit = false">Cancel</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </v-container>
 </template>
 <script>
 export default {
-  name: 'IndexPage',
+  name: 'TaskPage',
+  // middleware: ['auth', 'role'],
+  middleware: ['auth'],
   data() {
     return {
       // todos: [
@@ -54,7 +69,9 @@ export default {
       //   { task: 'New Task 1', status: 'done' },
       //   { task: 'New Task 2', status: 'undone' },
       // ],
+      dialogEdit: false,
       tableData: [],
+      editedItem: {},
       search: '',
       inputVal: '',
       filterBy: null,
@@ -83,7 +100,7 @@ export default {
   },
   mounted() {
     this.tableData = this.todos
-    console.log(this.tableData)
+    // console.log(this.tableData)
   },
 
   methods: {
@@ -102,7 +119,7 @@ export default {
       this.$store.dispatch('removeTodo', item)
     },
     toggleTodo(item) {
-      console.log(item)
+      // console.log(item)
       this.$store.dispatch('toggleTodo', item)
     },
     filterStatus() {
@@ -115,6 +132,21 @@ export default {
     clearFilter() {
       this.filterBy = null
       this.tableData = this.todos
+    },
+    editTask(item) {
+      // this.editTodo = item.task
+      this.editedItem = Object.assign({}, item)
+
+      console.log(item.task)
+      // console.log(this.editTodo)
+      // this.editTodo = ''
+      this.dialogEdit = true
+    },
+    saveEditedTask() {
+      // this.editedItem.task = this.editTodo
+      console.log('Edited Task', this.editedItem)
+      this.$store.dispatch('editTask', this.editedItem)
+      this.dialogEdit = false
     },
   },
 }
