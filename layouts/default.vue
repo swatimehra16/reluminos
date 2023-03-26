@@ -95,6 +95,11 @@ export default {
           title: 'Task',
           to: '/todo',
         },
+        {
+          icon: 'mdi-apps',
+          title: 'Kendo',
+          to: '/kendo',
+        },
       ],
       miniVariant: false,
       right: true,
