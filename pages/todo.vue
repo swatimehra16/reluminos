@@ -24,10 +24,19 @@
       <v-col cols="auto">
         <v-radio-group v-model="filterBy" row @change="filterStatus">
           <v-radio id="done" label="Done" value="done"></v-radio>
-          <v-radio id="undone" label="Undone" value="undone"></v-radio>
-        </v-radio-group>
+          <v-radio
+            id="undone"
+            label="Undone"
+            value="undone"
+          ></v-radio> </v-radio-group
+        ><v-radio
+          id="all"
+          label="All"
+          value="all"
+          @change="clearFilter"
+        ></v-radio>
       </v-col>
-      <v-col cols="auto"><v-btn @click="clearFilter">Clear</v-btn></v-col>
+      <v-col cols="auto"></v-col>
     </v-row>
 
     <v-data-table :headers="headers" :items="tableData" :search="search">
@@ -58,8 +67,8 @@
 <script>
 export default {
   name: 'TaskPage',
-  // middleware: ['auth', 'role'],
-  middleware: ['auth'],
+  middleware: ['auth', 'role'],
+  // middleware: ['auth'],
   data() {
     return {
       // todos: [

@@ -90,11 +90,11 @@ export default {
           title: 'Welcome',
           to: '/welcome',
         },
-        {
-          icon: 'mdi-list-box',
-          title: 'Task',
-          to: '/todo',
-        },
+        // {
+        //   icon: 'mdi-list-box',
+        //   title: 'Users',
+        //   to: '/users',
+        // },
       ],
       miniVariant: false,
       right: true,
@@ -106,18 +106,23 @@ export default {
     userName() {
       return this.$store.getters.loggedInUser
     },
-    // userRole() {
-    //   return this.$store.getters.role
-    // },
+    userRole() {
+      return this.$store.getters.role
+    },
   },
   mounted() {
-    // if (this.userRole === 'admin') {
-    //   this.items.push({ icon: 'mdi-list-box', title: 'Task', to: '/todo' })
-    // }
+    if (this.userRole === 'admin') {
+      this.items.push({ icon: 'mdi-list-box', title: 'Task', to: '/todo' })
+    }
+    if (this.userRole === 'admin') {
+      this.items.push({ icon: 'mdi-list-box', title: 'Users', to: '/users' })
+    }
   },
   methods: {
     logout() {
       this.$store.dispatch('loggedInUser', '')
+      this.$store.dispatch('userRole', '')
+
       this.$router.push('/login')
     },
   },
