@@ -90,11 +90,11 @@ export default {
           title: 'Welcome',
           to: '/welcome',
         },
-        // {
-        //   icon: 'mdi-list-box',
-        //   title: 'Users',
-        //   to: '/users',
-        // },
+        {
+          icon: 'mdi-list-box',
+          title: 'Task',
+          to: '/todo',
+        },
       ],
       miniVariant: false,
       right: true,
@@ -111,9 +111,9 @@ export default {
     },
   },
   mounted() {
-    if (this.userRole === 'admin') {
-      this.items.push({ icon: 'mdi-list-box', title: 'Task', to: '/todo' })
-    }
+    // if (this.userRole === 'admin') {
+    //   this.items.push({ icon: 'mdi-list-box', title: 'Task', to: '/todo' })
+    // }
     if (this.userRole === 'admin') {
       this.items.push({ icon: 'mdi-list-box', title: 'Users', to: '/users' })
     }

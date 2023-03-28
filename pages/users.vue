@@ -1,23 +1,19 @@
 <template>
   <div>
-    <div v-if="usersRole === 'admin'">
-      <v-data-table :headers="headers" :items="users">
-        <template #[`item.actions`]="{ item }">
-          <v-radio-group v-model="item.role" row @change="changeRole(item)">
-            <v-radio id="user" label="User" value="user"></v-radio>
-            <v-radio id="admin" label="Admin" value="admin"></v-radio>
-          </v-radio-group>
-        </template>
-      </v-data-table>
-    </div>
+    <v-data-table :headers="headers" :items="users">
+      <template #[`item.role`]="{ item }">
+        <v-radio-group v-model="item.role" row @change="changeRole(item)">
+          <v-radio id="user" label="User" value="user"></v-radio>
+          <v-radio id="admin" label="Admin" value="admin"></v-radio>
+        </v-radio-group>
+      </template>
+    </v-data-table>
   </div>
 </template>
 <script>
-// import UserData from '@/components/userData.vue'
-import _cloneDeep from 'lodash/cloneDeep'
 export default {
   //   components: { UserData },
-  middleware: ['auth'],
+  middleware: ['auth', 'role'],
   data() {
     return {
       headers: [
@@ -33,10 +29,6 @@ export default {
           text: 'Role',
           value: 'role',
         },
-        {
-          text: 'Actions',
-          value: 'actions',
-        },
       ],
     }
   },
@@ -46,7 +38,10 @@ export default {
       return this.$store.getters.role
     },
     users() {
-      return _cloneDeep(this.$store.getters.users)
+      const users = this.$store.getters.users.filter((item) => {
+        return item.email !== this.$store.getters.loggedInUser
+      })
+      return users
     },
   },
 

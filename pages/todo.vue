@@ -58,7 +58,7 @@
 <script>
 export default {
   name: 'TaskPage',
-  middleware: ['auth', 'role'],
+  middleware: ['auth'],
   // middleware: ['auth'],
   data() {
     return {
