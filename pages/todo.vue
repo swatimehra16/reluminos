@@ -24,19 +24,10 @@
       <v-col cols="auto">
         <v-radio-group v-model="filterBy" row @change="filterStatus">
           <v-radio id="done" label="Done" value="done"></v-radio>
-          <v-radio
-            id="undone"
-            label="Undone"
-            value="undone"
-          ></v-radio> </v-radio-group
-        ><v-radio
-          id="all"
-          label="All"
-          value="all"
-          @change="clearFilter"
-        ></v-radio>
+          <v-radio id="undone" label="Undone" value="undone"></v-radio>
+          <v-radio id="all" label="All" value="null"></v-radio>
+        </v-radio-group>
       </v-col>
-      <v-col cols="auto"></v-col>
     </v-row>
 
     <v-data-table :headers="headers" :items="tableData" :search="search">
@@ -132,16 +123,21 @@ export default {
       this.$store.dispatch('toggleTodo', item)
     },
     filterStatus() {
-      const newTodo = this.todos.filter((item) => {
-        return item.status === this.filterBy
-      })
-      this.tableData = newTodo
-      console.log(this.tableData)
+      if (this.filterBy === 'null') {
+        this.tableData = this.todos
+        console.log('@@@@@@@@@', this.filterBy)
+      } else {
+        const newTodo = this.todos.filter((item) => {
+          return item.status === this.filterBy
+        })
+        this.tableData = newTodo
+        console.log(this.tableData)
+      }
     },
-    clearFilter() {
-      this.filterBy = null
-      this.tableData = this.todos
-    },
+    // clearFilter() {
+    //   this.filterBy = null
+    //   this.tableData = this.todos
+    // },
     editTask(item) {
       // this.editTodo = item.task
       this.editedItem = Object.assign({}, item)

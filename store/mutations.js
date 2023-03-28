@@ -44,4 +44,14 @@ export default {
   signUp(state, details) {
     state.users.push(details)
   },
+
+  changeRole(state, item) {
+    const newIndex = state.users.findIndex((el) => {
+      return el.email === item.email
+    })
+    // if (item.role === 'admin') item.role = 'user'
+    // else item.role = 'admin'
+    state.users[newIndex].role = item.role
+    console.log('Users after ', state.users)
+  },
 }

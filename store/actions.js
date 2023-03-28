@@ -22,4 +22,7 @@ export default {
   role(context, payload) {
     context.commit('role', payload)
   },
+  changeRole(context, payload) {
+    context.commit('changeRole', payload)
+  },
 }
